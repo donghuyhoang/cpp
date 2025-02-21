@@ -25,12 +25,20 @@ int main(){
   int mu = n;
   if(u != 1){
     for (int i = 1; i <= n; i++){
+      if(!a[i]) {
+        --mu;
+        continue;
+      }
       printf("%.3lfy^%d ",(double)pow(u,mu) * a[i],mu);
       --mu;
     }
   }
   else {
     for (int i = 1; i <= n; i++) {
+        if(!a[i]) {
+          --mu;
+          continue;
+        }
         printf("%.3lfy^%d ",a[i],mu);
         --mu;
     }
