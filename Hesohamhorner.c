@@ -4,7 +4,10 @@
 double a[10000];
 int main(){
   int n; float u,k;
-  scanf("%d%f%f",&n,&u,&k);
+  printf("Nhap so luong he so: "); scanf("%d",&n);
+  printf("Nhap he so cua y: "); scanf("%f",&u);
+  printf("Nhap he so c: "); scanf("%f",&k);
+  printf("Nhap cac he so: ");
   int cnt = n + 1;
   for (int i = 1; i <= n + 1;i++){
     scanf("%lf",&a[i]);
@@ -22,10 +25,15 @@ int main(){
   int mu = n;
   if(u != 1){
     for (int i = 1; i <= n; i++){
-      printf("%.3lf ",(double)pow(u,mu) * a[i]);
+      printf("%.3lfy^%d ",(double)pow(u,mu) * a[i],mu);
       --mu;
     }
-    printf("%.3lf",a[n+1]);
   }
-  else for (int i = 1; i <= n + 1; i++) printf("%.3lf ",a[i]);
+  else {
+    for (int i = 1; i <= n; i++) {
+        printf("%.3lfy^%d ",a[i],mu);
+        --mu;
+    }
+  }
+  printf("%.3lf",a[n+1]);
 }
