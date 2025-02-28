@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<math.h>
 #define ll long long
-const int inf = INT_MAX;
-const int MAX = 1000;
-float a[MAX];
+const int inf = 1e7;
+const int MAX = 10000;
+float a[10000];
 
 float minn(float a,float b){
   if(a < b) return a;
