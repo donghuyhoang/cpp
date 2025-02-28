@@ -1,0 +1,70 @@
+#include<stdio.h>
+#include<math.h>
+#define ll long long
+const int inf = INT_MAX;
+const int MAX = 1000;
+float a[MAX];
+
+float minn(float a,float b){
+  if(a < b) return a;
+  return b;
+}
+
+int main(){
+  int n; scanf("%d",&n);
+  for (int i = 1; i <= n + 1; i++) scanf("%f",&a[i]);
+  float n0 = 0, n1 = 0, n2 = 0, n3 = 0;
+  float mi = inf,save = 0,fi = 0;
+  for (int i = 1; i <= n + 1; i++){
+      mi = minn(mi,a[i]);
+      if(!save && a[i] < 0) save = i;
+  }
+  --save;
+  n0 = 1 + pow(fabs(mi)/a[1],1/save);
+  save = 0;
+  mi = inf;
+  if(a[n+1] > 0){
+    for(int i = n + 1; i >= 1; i--){
+      mi = minn(mi,a[i]);
+      if(!save && a[i] < 0) save = i;
+    }
+    --save;
+    n1 = 1 + pow(fabs(mi)/a[n+1],1/save);
+    save = 0;
+    mi = inf;
+  }
+  for (int i = 0; i < n; i++){
+    if(i & 1){
+      a[i+1] *= -1;
+    }
+  }
+  if(a[1] > 0){
+    for (int i = 1; i <= n + 1; i++){
+      mi = minn(mi,a[i]);
+      if(!save && a[i] < 0) save = i;
+    }
+    --save;
+    n2 = 1 + pow(fabs(mi)/a[1],1/save);
+    save = 0;
+    mi = inf;
+  }
+  if(a[n+1] > 0){
+    for (int i = n + 1; i >= 1; i--){
+      mi = minn(mi,a[i]);
+      if(!save && a[i] < 0) save = i;
+    }
+    --save;
+    n3 = 1 + pow(fabs(mi)/a[n+1],1/save);
+  }
+  printf("Nghiem duong: ");
+  if(!n1) printf("Am vo cung ");
+  else printf("%.3f ",1/n1);
+  if(!n0) printf("Duong vo cung\n");
+  else printf("%.3f\n",n0);
+  printf("Nghiem am: ");
+  if(!n2) printf("Am vo cung ");
+  else printf("%.3f ",n2*-1);
+  if(!n3) printf("Duong vo cung");
+  else printf("%.3f",(-1)/n3);
+  return 0;
+}
