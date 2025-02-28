@@ -57,14 +57,14 @@ int main(){
     n3 = 1 + pow(fabs(mi)/a[n+1],1/save);
   }
   printf("Nghiem duong: ");
-  if(!n1) printf("Am vo cung ");
+  if(!n1) printf("0 ");
   else printf("%.3f ",1/n1);
   if(!n0) printf("Duong vo cung\n");
   else printf("%.3f\n",n0);
   printf("Nghiem am: ");
   if(!n2) printf("Am vo cung ");
   else printf("%.3f ",n2*-1);
-  if(!n3) printf("Duong vo cung");
+  if(!n3) printf("0");
   else printf("%.3f",(-1)/n3);
   return 0;
 }
