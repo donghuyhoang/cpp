@@ -1,0 +1,99 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define fi first
+#define se second
+#define in insert
+#define pb push_back
+#define endl '\n'
+#define L(s) (int)s.length()
+#define ms(a,x) memset(a,x,sizeof a)
+typedef long long ll;
+typedef unsigned long long ull;
+using P = pair<int,int>;
+inline ll gcd(ll a,ll b){if(b<=0) return a; return gcd(b,a%b);}
+inline ll lcm(ll a,ll b){return a/gcd(a,b)*b;}
+const int inf = 2e9;
+const int uinf = INT_MIN;
+const long long INf = 9e18;
+const long long UINf = LLONG_MIN;
+const int N = 1e5 + 5;
+
+const int MAX = 55;
+const int MOD = (int)1e9 + 22071997;
+
+struct Matrix{
+    int m,n;
+    ll d[MAX][MAX];
+    Matrix(int _m = 0, int _n = 0){
+        n = _n;
+        m = _m;
+        memset(d,0,sizeof(d));
+    }
+    Matrix operator + (const Matrix &a) const {
+        Matrix res(m, n);
+        for (int i = 0; i < m; i++) for (int j = 0; j < n; j++) {
+            res.d[i][j] = d[i][j] + a.d[i][j];
+            if (res.d[i][j] >= MOD) res.d[i][j] -= MOD;
+        }
+        return res;
+    }
+ 
+    Matrix operator * (const Matrix &a) const {
+        int x = m, y = n, z = a.n;
+        Matrix res(x, z);
+        for (int i = 0; i < x; i++) for (int j = 0; j < y; j++) 
+        for (int k = 0; k < z; k++) {
+                res.d[i][k] += 1LL * d[i][j] * a.d[j][k];
+                if (res.d[i][k] >= 1LL * MOD * MOD) res.d[i][k] -= 1LL * MOD * MOD;
+            }
+        for (int i = 0; i < x; i++) for (int k = 0; k < z; k++) res.d[i][k] %= MOD;
+ 
+        return res;
+    }
+ 
+    Matrix operator ^ (long long k) const {
+        Matrix res(n, n);
+        for (int i = 0; i < n; i++) res.d[i][i] = 1;
+        Matrix mul = *this;
+        while (k > 0) {
+            if (k & 1) res = res * mul;
+            mul = mul * mul;
+            k >>= 1;
+        }
+        return res;
+    }
+    long long* operator[] (int i) {
+        return d[i];
+    }
+    const long long* operator[] (int i) const {
+        return d[i];
+    }    
+};
+
+int main(){
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  // f(i) = f(i-1) + f(i-2);
+  // Goi F(i) = f(i);
+  // Goi G(i) = f(i + 1)
+  // F(i) = G(i-1);
+  // F(i+1) = F(i-1) + G(i-1) | F(i-1) = f(i-1); G(i-1) = f(i);
+    int n; cin >> n;
+    Matrix v(1, 2);
+    v.d[0][0] = 0;
+    v.d[0][1] = 1;
+ 
+    Matrix a(2, 2);
+    a.d[0][0] = 0;
+    a.d[0][1] = 1;
+    a.d[1][0] = 1;
+    a.d[1][1] = 1;
+    for (int i = 1; i <= n; i++){
+        Matrix res = v * (a ^ i);
+        cout << res[0][0] << endl;
+    }
+}
+
+
+
+
