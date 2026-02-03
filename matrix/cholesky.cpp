@@ -23,7 +23,7 @@ struct Matrix{
             cout << endl;
         }
     }
-    void outputTranfer(){
+    void outputTranspose(){
         for (int i = 0; i < n; i++){
             for (int j = 0; j < m; j++){
                 cout << x[j][i] << ' ';
@@ -46,7 +46,7 @@ Matrix operator*(const Matrix& a, const Matrix& b){
     }
     return c;
 }
-Matrix Tranfer(Matrix a){
+Matrix Transpose(Matrix a){
     Matrix b(a.m,a.n);
     for (int i = 0; i < a.n; i++){
         for (int j = 0; j < a.m; j++){
@@ -123,13 +123,13 @@ int main(){
     Matrix L = choleskyDecomposition(A);
     cout << "L:" << endl; L.output();
     cout << endl;
-    cout << "L^T" << endl; L.outputTranfer();
+    cout << "L^T" << endl; L.outputTranspose();
     cout << "Su dung Cholesky bien the: " << endl;
     pair<Matrix,Matrix> p = choleskyDecompositionModified(A);
     cout << "K: " << endl; p.first.output();
     cout << "D: " << endl; p.second.output();
-    cout << "K^T: " << endl; p.first.outputTranfer();
-    Matrix L_T = Tranfer(L);
+    cout << "K^T: " << endl; p.first.outputTranspose();
+    Matrix L_T = Transpose(L);
     Matrix check = L * L_T;
     cout << "Check cholesky L* L^T: "; check.output();
  }
