@@ -37,7 +37,7 @@ Matrix operator*(const Matrix& a, const Matrix& b){
     Matrix c(a.n,b.m);
     for (int i = 0; i < a.n; i++){
         for (int j = 0; j < b.m; j++){
-            long long res = 0;
+            double res = 0;
             for (int l = 0; l < a.m; l++){
                 res += a.x[i][l] * b.x[l][j];
             }
